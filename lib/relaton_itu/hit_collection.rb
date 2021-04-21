@@ -18,9 +18,11 @@ module RelatonItu
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
       @gi_imp = /\.Imp\d/.match?(ref)
-      if ref.match? /^(ITU-T|ITU-R\sRR)/
+
+      case ref
+      when /^(ITU-T|ITU-R\sRR)/
         request_search
-      elsif ref.match /^ITU-R\s(.*)$/
+      when /^ITU-R\s(.*)$/
         request_document($1.upcase)
       end
     end

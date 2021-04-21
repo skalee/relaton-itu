@@ -17,7 +17,7 @@ module RelatonItu
 
     # @param ref [String]
     # @param year [String]
-    def initialize(ref, year = nil) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    def initialize(ref, year = nil)
       text = ref.sub /(?<=\.)Imp\s?(?=\d)/, ""
       super text, year
       @gi_imp = /\.Imp\d/.match?(ref)
@@ -40,7 +40,7 @@ module RelatonItu
       @array = hits JSON.parse(resp.body)
     end
 
-    def request_document(rf)
+    def request_document(rf) # rubocop:disable Metrics/MethodLength
       url = "#{GITHUB_RAW_DOMAIN}/#{GITHUB_R_REPO}/master/data/#{rf}.yaml"
       resp = Net::HTTP.get_response(URI(url))
       if resp.code == "404"

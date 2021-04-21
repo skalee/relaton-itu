@@ -9,6 +9,9 @@ module RelatonItu
   class HitCollection < RelatonBib::HitCollection
     DOMAIN = "https://www.itu.int"
 
+    GITHUB_RAW_DOMAIN = "https://raw.githubusercontent.com"
+    GITHUB_R_REPO = "relaton/relaton-data-itu-r"
+
     # @return [TrueClass, FalseClass]
     attr_reader :gi_imp
 
@@ -38,7 +41,7 @@ module RelatonItu
     end
 
     def request_document(rf)
-      url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
+      url = "#{GITHUB_RAW_DOMAIN}/#{GITHUB_R_REPO}/master/data/#{rf}.yaml"
       resp = Net::HTTP.get_response(URI(url))
       if resp.code == "404"
         @array = []

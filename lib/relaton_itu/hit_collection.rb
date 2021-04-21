@@ -24,8 +24,8 @@ module RelatonItu
         resp = Net::HTTP.post(uri, data.to_json,
                               "Content-Type" => "application/json")
         @array = hits JSON.parse(resp.body)
-      elsif ref.match? /^ITU-R/
-        rf = ref.sub(/^ITU-R\s/, "").upcase
+      elsif ref.match /^ITU-R\s(.*)$/
+        rf = $1.upcase
         url = "https://raw.githubusercontent.com/relaton/relaton-data-itu-r/master/data/#{rf}.yaml"
         resp = Net::HTTP.get_response(URI(url))
         if resp.code == "404"
